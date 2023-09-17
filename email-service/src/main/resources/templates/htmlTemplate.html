@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Template</title>
+</head>
+<body>
+    <h1>Hello, <span th:text="${name}"></span>!</h1>
+    <p>Your account balance is: <span th:text="${balance}"></span></p>
+    <h3>Marks</h3>
+    <ul>
+        <li th:each="transaction : ${transactions}">
+            Transaction: <span th:text="${transaction}"></span>
+        </li>
+    </ul>
+</body>
+</html>
