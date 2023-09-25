@@ -115,7 +115,9 @@ public class EmailSenderService {
 //        ObjectMapper objectMapper = new ObjectMapper();
 //        Student student = objectMapper.readValue(emailJson, Student.class);
         MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+//        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+
         helper.setFrom("dangolprasanna2001@gmail.com");
         helper.setTo(student.getParent().getEmailAddress());
         helper.setSubject("Marksheet of " + student.getName());
