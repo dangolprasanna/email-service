@@ -1,8 +1,7 @@
 package com.smtp.mail;
 
-import java.io.IOException;
-import java.text.ParseException;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-import jakarta.mail.MessagingException;
+import java.io.IOException;
 
 @RestController
 public class EmailSenderController {
@@ -57,7 +54,7 @@ public class EmailSenderController {
 
     @PostMapping("/sendWithTemp")
     public String sendMailWithTemplate(@RequestParam("emailData") String emailJson,
-            @RequestParam("file") MultipartFile[] file, @RequestParam("tempFile") MultipartFile tempFile)
+                                       @RequestParam("file") MultipartFile[] file, @RequestParam("tempFile") MultipartFile tempFile)
             throws MessagingException, IOException {
         try {
             // Send the email
@@ -73,12 +70,19 @@ public class EmailSenderController {
         }
     }
 
-    @PostMapping("/sendScheduledTemp")
-    public ResponseEntity<?> sendScheduledMessage(@RequestParam("emailData") String emailJson,
-            @RequestParam("file") MultipartFile[] file, @RequestParam("tempFile") MultipartFile tempFile,
-            @RequestParam("DateTime") String DateTime) throws MessagingException, IOException, ParseException {
+//    @PostMapping("/sendScheduledTemp")
+//    public ResponseEntity<String> sendScheduledMessage(@RequestParam("emailData") String emailJson,
+//                                                       @RequestParam("file") MultipartFile[] file, @RequestParam("tempFile") MultipartFile tempFile,
+//                                                       @RequestParam("DateTime") String DateTime) throws MessagingException, IOException, ParseException {
+//
+//        emailScheduler.sendScheduledEmail(emailJson, file, tempFile, DateTime);
+//        return ResponseEntity.ok().body("Sent");
+//    }
 
-        emailScheduler.sendScheduledEmail(emailJson, file, tempFile, DateTime);
-        return ResponseEntity.ok().body("Sent");
+    @PostMapping("/sendMarksheetMail")
+    public ResponseEntity<String> sendMarksheetMail(@RequestBody String emailJson) throws MessagingException, IOException {
+        System.out.println(emailJson);
+        sendEmail.sendMarksheetMail(emailJson);
+        return ResponseEntity.ok("Marksheet sent");
     }
 }
