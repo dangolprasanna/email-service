@@ -1,6 +1,7 @@
 package com.smtp.mail;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.smtp.mail.data.Student;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -79,10 +80,11 @@ public class EmailSenderController {
 //        return ResponseEntity.ok().body("Sent");
 //    }
 
-    @PostMapping("/sendMarksheetMail")
-    public ResponseEntity<String> sendMarksheetMail(@RequestBody String emailJson) throws MessagingException, IOException {
-        System.out.println(emailJson);
-        sendEmail.sendMarksheetMail(emailJson);
+    @PostMapping("/sendBulkEmail")
+    public ResponseEntity<String> sendMarksheetMail(@RequestBody Student student) throws MessagingException, IOException {
+        System.out.println(student);
+//        String emailJson = student.toString();
+        sendEmail.sendMarksheetMail(student);
         return ResponseEntity.ok("Marksheet sent");
     }
 }

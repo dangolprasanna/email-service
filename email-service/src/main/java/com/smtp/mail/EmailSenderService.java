@@ -110,10 +110,10 @@ public class EmailSenderService {
 //    }
 
 
-    public void sendMarksheetMail(String emailJson) throws MessagingException, IOException {
+    public void sendMarksheetMail(Student student) throws MessagingException, IOException {
         // Convert the JSON string to an Email object
-        ObjectMapper objectMapper = new ObjectMapper();
-        Student student = objectMapper.readValue(emailJson, Student.class);
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Student student = objectMapper.readValue(emailJson, Student.class);
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
         helper.setFrom("dangolprasanna2001@gmail.com");
